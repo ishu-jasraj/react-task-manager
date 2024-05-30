@@ -1,6 +1,7 @@
 import Button from "./Button";
+import Tasks from "./Task";
 
-export default function SelectedProject({ currProject, deleteProject }) {
+export default function SelectedProject({ currProject, deleteProject, onAddNewTask }) {
     return (
         <div className="mt-16 w-2/3">
             <header>
@@ -12,7 +13,7 @@ export default function SelectedProject({ currProject, deleteProject }) {
                 <p>{currProject.description}</p>
             </header>
             <hr />
-            <h2 className="mt-4 uppercase">Tasks</h2>
+            <Tasks onAddNewTask={onAddNewTask} />
         </div>
     )
 }

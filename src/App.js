@@ -61,7 +61,11 @@ export default function App() {
     })
   }
 
-  let content = <SelectedProject currProject={project.currentProject} deleteProject={deleteProject} />;
+  function onAddNewTask(task) {
+    console.log('adding new task ', task)
+  }
+
+  let content = <SelectedProject currProject={project.currentProject} deleteProject={deleteProject} onAddNewTask={onAddNewTask} />;
   if (project.currentProject === undefined) {
     content = <NoProjectSelected onSelectNewProject={handleNewProject} />
   }
