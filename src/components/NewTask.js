@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-export default function NewTask(onAddNewTask) {
+export default function NewTask({ onAddNewTask }) {
+
     const [task, setTask] = useState('');
     function handleInputTask(event) {
         setTask(event.target.value);
@@ -14,6 +15,7 @@ export default function NewTask(onAddNewTask) {
                 value={task}
             />
             <button className="text-stone-600" onClick={() => {
+                setTask('');
                 onAddNewTask(task);
             }}>Add Task</button>
         </div>

@@ -8,7 +8,8 @@ import SelectedProject from './components/SelectedProject';
 export default function App() {
   const [project, setProject] = useState({
     currentProject: undefined,
-    projects: []
+    projects: [],
+    tasks: []
   });
 
   function handleNewProject() {
@@ -24,6 +25,7 @@ export default function App() {
     setProject(prevProject => {
       newProject.id = Math.random();
       return {
+        ...prevProject,
         currentProject: undefined,
         projects: [...prevProject.projects, newProject],
       }
@@ -54,6 +56,7 @@ export default function App() {
         return currProject.id !== projectId
       })
       return ({
+        ...prevProject,
         currentProject: undefined,
         projects: filteredProjects
       }
@@ -63,9 +66,24 @@ export default function App() {
 
   function onAddNewTask(task) {
     console.log('adding new task ', task)
+    const newTask = {
+      taskId: Math.random(),
+      projectId: project.currentProject.id,
+      task: task
+    }
+
+    setProject((prevProject) => {
+      return (
+        {
+          ...prevProject,
+          tasks: [...prevProject.tasks, newTask]
+        }
+      )
+    })
   }
 
-  let content = <SelectedProject currProject={project.currentProject} deleteProject={deleteProject} onAddNewTask={onAddNewTask} />;
+
+  let content = <SelectedProject project={project} deleteProject={deleteProject} onAddNewTask={onAddNewTask} />;
   if (project.currentProject === undefined) {
     content = <NoProjectSelected onSelectNewProject={handleNewProject} />
   }
